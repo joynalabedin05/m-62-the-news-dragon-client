@@ -7,8 +7,10 @@ const Category = () => {
     const categoryNews = useLoaderData();
     return (
         <div>
-            <h4>this is a category: {categoryNews.length}</h4>
-            {
+            { id &&
+                <h4>This category News: {categoryNews.length}</h4>
+            }
+            { 
                 categoryNews.map(news=> <NewsCard
                 key={news._id}
                 news={news}

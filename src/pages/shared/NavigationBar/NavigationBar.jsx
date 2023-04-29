@@ -2,12 +2,17 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import { FaMeh } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 import { useContext } from 'react';
 import { AuthContex } from '../../../provider/AuthProvider';
 
 const NavigationBar = () => {
-    const {user} = useContext(AuthContex);
+    const {user,logOut} = useContext(AuthContex);
+    const handleLogOut = ()=>{
+        logOut()
+        .then()
+        .catch(error=>console.log(error))
+    }
     return (
         <Container>
              <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -23,12 +28,12 @@ const NavigationBar = () => {
                 </Nav>
                 <Nav>                
                     {user &&  <div>
-                        <FaMeh></FaMeh>
+                        <FaUserCircle></FaUserCircle>
                         <span className='mx-2'>{user?.displayName}</span>
                     </div> }
 
                     {user?  
-                    <Button variant="secondary">logout</Button>:
+                    <Button onClick={handleLogOut} variant="secondary">logout</Button>:
                     <Link to='/login'><Button variant="secondary">Login</Button></Link>
                     }
                             
